@@ -1,0 +1,6 @@
+# Ignore intermediate and result files
+intermediate/
+input/
+result/
+.snakemake/
+.git/
