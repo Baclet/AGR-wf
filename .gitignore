@@ -4,3 +4,5 @@ input/
 result/
 .snakemake/
 .git/
+data/illumina/*
+data/nanopore/*
