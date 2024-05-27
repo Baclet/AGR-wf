@@ -1,0 +1,7 @@
+name: AGR-fastyqc
+channels:
+    - conda-forge
+    - bioconda
+dependencies:
+    - fastqc
+

@@ -22,13 +22,18 @@ Das Conda Environment sollte wie folgt erstellt werden:
 Die Rohdaten sollten in den Ordnern `data/nanopore` und/oder `data/illumina` abgelegt werden. 
 
 Illumina Sequenzen müssen in folgendem Format vorliegen: 
-`illumina/sample_1.fastq.gz` und `illumina/sample_2.fastq.gz` also z. B. `data/illumina/FLA_1.fastq.gz` 
+`illumina/sample_1.fastq.gz` und `illumina/sample_2.fastq.gz` 
+also z. B. `data/illumina/FLA_1.fastq.gz` 
 
 Nanopore Sequenzen müssen in folgendem Format vorliegen:
-`nanopore/sample/.../pod5/xyz.pod5` also z. B. `data/nanopore/FLA/pod5/...`
+`nanopore/sample/.../pod5/xyz.pod5` 
+also z. B. `data/nanopore/FLA/pod5/...`
 
 Ebenfalls möglich ist die Ablage von `.fastq` oder `.bam` files nach dem Basecalling:
-`nanopore/sample/basecaller_output/sample.bam` also `data/nanopore/FLA/basecaller_output/FLA.bam`
-`nanopore/sample/basecaller_output/sample.fastq` also `data/nanopore/FLA/basecaller_output/FLA.fastq`
+`nanopore/sample/basecaller_output/sample.bam` 
+also `data/nanopore/FLA/basecaller_output/FLA.bam`
+
+`nanopore/sample/basecaller_output/sample.fastq` 
+also `data/nanopore/FLA/basecaller_output/FLA.fastq`
 
 Andernfalls erfolgt das basecalling im Rahmen des Workflows. 
