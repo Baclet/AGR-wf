@@ -1,8 +1,7 @@
 # Ignore intermediate and result files
 intermediate/
-input/
 result/
 .snakemake/
 .git/
-data/illumina/*
-data/nanopore/*
+###data/illumina/*
+###data/nanopore/*
