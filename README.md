@@ -41,3 +41,11 @@ also `data/nanopore/FLA/basecaller_output/FLA.bam`
 also `data/nanopore/FLA/basecaller_output/FLA.fastq`
 
 Andernfalls erfolgt das basecalling im Rahmen des Workflows. 
+
+
+### Ausführung des Tools
+
+Zur Ausführung muss das Working directory `AGR-wf/` sein.
+
+Der Workflow wird gestartet mit dem Befehl: `snakemake --use-conda all --cores 4`
+Die `-cores x` Option gibt die Anzahl der Threads oder Kerne an und ist abhängig vom vorhandenen Computer.
