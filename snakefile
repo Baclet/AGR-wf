@@ -23,4 +23,4 @@ rule fastqc_all:
     conda:
         "../../workflow/env/fastqc.yml"
     shell:
-        "mkdir -p {params.directory} && fastqc -o {params.directory} {input}
+        "mkdir -p {params.directory} && fastqc -o {params.directory} {input}"
