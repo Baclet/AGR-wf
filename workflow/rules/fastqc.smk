@@ -1,10 +1,11 @@
 rule fastqc:
     # Verwendung von fastqc zur QC
-    input:
-        sample = expand("data/illumina/{sample}_{pair}.fastq.gz", pair=["1", "2"], sample=glob_wildcards("data/illumina/{sample}_*.fastq.gz").sample)
+    input:        
+	sample="{sample}_1.fastq.gz",
+               "{sample}_2.fastq.gz"
     output:
-        fastqc_html = directory("result/{sample}/quality_control/{sample}_{pair}_fastqc.html"),
-        fastqc_zip = directory("result/{sample}/quality_control/{sample}_{pair}_fastqc.zip")
+        fastqc_html = "result/{sample}/quality_control/{sample}_{pair}_fastqc.html",
+        fastqc_zip = "result/{sample}/quality_control/{sample}_{pair}_fastqc.zip"
     params:
         directory = "result/{sample}/quality_control"
     conda:
