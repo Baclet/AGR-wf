@@ -11,10 +11,14 @@ Die aktuellste Version von AGR-wf ist verfügbar unter [github](https://github.c
 
 `git clone https://github.com/Baclet/AGR-wf`
 
+Wechsle in den Ordner `AGR-wf`
+
+`cd AGR-wf`
+
 Das Conda Environment sollte wie folgt erstellt werden:
 
 1. Installation von `mamba` mit dem Befehl `conda install -n base --override-channels -c conda-forge mamba 'python_abi=*=*cp*'` siehe auch [mamba documentaiton](https://mamba.readthedocs.io/en/latest/mamba-installation.html).
-2. Ausführen des Befehls `mamba env create --file environment.yaml` dieser Befehl erzeugt die notwendige Umgebung für `AGR-wf`.
+2. Ausführen des Befehls `mamba env create --file workflow/environment.yaml` dieser Befehl erzeugt die notwendige Umgebung für `AGR-wf`.
 3. Wechseln in die Umgebung `AGR-wf` mit dem Befehl `mamba activate AGR-wf`
 
 ### Ablage der Rohdaten

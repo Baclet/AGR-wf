@@ -8,6 +8,6 @@ rule fastqc:
     params:
         directory = "result/MSC/quality_control"
     conda:
-        "../env/fastqc.yml"
+        "workflow/env/fastqc.yml"
     shell:
-        "mkdir -p {params.directory} && fastqc -o {params.directory} {input}"
+        "mkdir -p {params.directory} && fastqc -o {params.directory} {input.sample}"

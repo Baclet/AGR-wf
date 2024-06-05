@@ -1,4 +1,6 @@
-name: AGR-fastyqc
+# workflow/env/fastqc.yml
+
+name: AGR-fastqc
 channels:
     - conda-forge
     - bioconda
