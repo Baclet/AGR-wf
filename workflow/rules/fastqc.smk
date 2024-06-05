@@ -1,5 +1,5 @@
 rule fastqc:
-    # Uses fastqc to verify the quality of the reads
+    # Verwendung von fastqc zur QC
     input:
         sample = "data/illumina/MSC_1.fastq.gz"
     output:

@@ -1,3 +1,4 @@
+# Snakefile
 import pandas
 
 configfile: "workflow/.config.yaml"
@@ -8,4 +9,4 @@ include: "workflow/rules/fastqc.smk"
 rule all:
     input:
         "result/MSC/quality_control/MSC_fastqc.html",
-        "result/MSC/quality_control/MSC_fastqc.zip
+        "result/MSC/quality_control/MSC_fastqc.zip"
