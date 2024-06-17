@@ -5,3 +5,4 @@ paths:
   results: "result/MSC/quality_control/"
 samples:
   - "MSC_1"
+  - "MSC_2"
