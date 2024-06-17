@@ -16,7 +16,7 @@ Wechsle in den Ordner `AGR-wf`
 
 Das Conda Environment sollte wie folgt erstellt werden:
 
-1. Wenn noch nicht vorhanden Download und Installaton von `conda` z.B.: Wie folgt: `mkdir -p ~/miniconda3 && wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh` und `bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3`
+1. Wenn noch nicht vorhanden Download und Installaton von `conda` z.B.: Wie folgt: `mkdir -p ~/miniconda3 && wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh` und ausführen von `bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3`
 2. Ausführen des Befehls `conda env create --file workflow/environment.yaml` dieser Befehl erzeugt die notwendige Umgebung für `AGR-wf`.
 3. Wechseln in die Umgebung `AGR-wf` mit dem Befehl `conda activate AGR-wf`
 
@@ -46,5 +46,5 @@ Andernfalls erfolgt das basecalling im Rahmen des Workflows.
 
 Zur Ausführung muss das Working directory `AGR-wf/` sein.
 
-Der Workflow wird gestartet mit dem Befehl: `snakemake --use-conda all --cores 4`
+Der Workflow wird gestartet mit dem Befehl: `snakemake --cores 4`
 Die `-cores x` Option gibt die Anzahl der Threads oder Kerne an und ist abhängig vom vorhandenen Computer.
