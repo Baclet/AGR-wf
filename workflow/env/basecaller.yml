@@ -1,0 +1,11 @@
+# workflow/env/basecaller.yml
+
+name: basecaller
+channels:
+    - hcc
+    - bioconda
+    - conda-forge
+    - defaults
+dependencies:
+    - samtools
+    - dorado

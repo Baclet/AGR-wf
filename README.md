@@ -23,21 +23,22 @@ Das Conda Environment sollte wie folgt erstellt werden:
 
 ### Ablage der Rohdaten
 
-Die Rohdaten sollten in den Ordnern `data/nanopore` und/oder `data/illumina` abgelegt werden. 
+Die Rohdaten müssen in den Ordnern `data/nanopore` und/oder `data/illumina` abgelegt werden. 
 
-Illumina Sequenzen müssen in folgendem Format vorliegen: 
-`illumina/sample_1.fastq.gz` und `illumina/sample_2.fastq.gz` 
+Illumina Sequenzen müssen(!) in folgendem Format vorliegen: 
+`illumina/{sample}_1.fastq.gz` und `illumina/{sample}_2.fastq.gz` 
 also z. B. `data/illumina/FLA_1.fastq.gz` 
 
-Nanopore Sequenzen müssen in folgendem Format vorliegen:
-`nanopore/sample/.../pod5/xyz.pod5` 
+
+Nanopore Sequenzen müssen(!) in folgendem Format vorliegen:
+`nanopore/{sample}/pod5/xyz.pod5` 
 also z. B. `data/nanopore/FLA/pod5/...`
 
 Ebenfalls möglich ist die Ablage von `.fastq` oder `.bam` files nach dem Basecalling:
-`nanopore/sample/basecaller_output/sample.bam` 
+`nanopore/{sample}/basecaller_output/{sample}.bam` 
 also `data/nanopore/FLA/basecaller_output/FLA.bam`
 
-`nanopore/sample/basecaller_output/sample.fastq` 
+`nanopore/{sample}/basecaller_output/{sample}.fastq` 
 also `data/nanopore/FLA/basecaller_output/FLA.fastq`
 
 Andernfalls erfolgt das basecalling im Rahmen des Workflows. 
@@ -47,5 +48,5 @@ Andernfalls erfolgt das basecalling im Rahmen des Workflows.
 
 Zur Ausführung muss das Working directory `AGR-wf/` sein.
 
-Der Workflow wird gestartet mit dem Befehl: `snakemake --cores 4`
+Der Workflow wird gestartet mit dem Befehl: `snakemake --use-conda --cores 4`
 Die `-cores x` Option gibt die Anzahl der Threads oder Kerne an und ist abhängig vom vorhandenen Computer.

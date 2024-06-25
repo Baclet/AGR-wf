@@ -7,4 +7,3 @@ dependencies:
     - python <= 3.10.0a
     - snakemake >= 7.32.0
     - pandas
-#    - fastqc test ohne fastqc hier

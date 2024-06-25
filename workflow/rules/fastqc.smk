@@ -20,7 +20,7 @@ rule fastqc_short:
 # Regel für Nanopore Reads
 rule fastqc_long:
     input:
-        "data/nanopore/{sample}/basecaller_output/{sample}.fastq"
+        "result/{sample}/intermediate/nanopore/{sample}.fastq"
     output:
         html = "result/{sample}/quality_control/nanopore/{sample}_fastqc.html",
         zip = "result/{sample}/quality_control/nanopore/{sample}_fastqc.zip"
