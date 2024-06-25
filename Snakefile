@@ -1,11 +1,11 @@
-#Snakefile
+# Snakefile
 
 import pandas as pd
 from snakemake.io import glob_wildcards
 import os
 import re
 
-#Damit werden die samples korrekt gefunden und zugeordnet (Endung .bam .fastq oder im Ordner in dem sich die .pod5 Dateien befinden
+# Auffinden der samples (Endung .bam .fastq oder im Ordner in dem sich die .pod5 Dateien befinden)
 def find_samples(path):
     samples = set()
     for root, dirs, files in os.walk(path):
@@ -24,6 +24,7 @@ samples_nano = find_samples("data/nanopore")
 print(f"Illumina samples: {samples_illumina}")
 print(f"Nanopore samples: {samples_nano}")
 
+# hinzufügen aller rules
 include: "workflow/rules/fastqc.smk"
 include: "workflow/rules/basecaller.smk"
 
