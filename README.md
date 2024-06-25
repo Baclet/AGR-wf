@@ -18,7 +18,8 @@ Das Conda Environment sollte wie folgt erstellt werden:
 
 1. Wenn noch nicht vorhanden Download und Installaton von `conda` z.B.: Wie folgt: `mkdir -p ~/miniconda3 && wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh` und ausführen von `bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3`
 2. Ausführen des Befehls `conda env create --file workflow/environment.yaml` dieser Befehl erzeugt die notwendige Umgebung für `AGR-wf`.
-3. Wechseln in die Umgebung `AGR-wf` mit dem Befehl `conda activate AGR-wf`
+3. Installation von mamba mit `conda install -n base -c conda-forge mamba`
+4. Wechseln in die Umgebung `AGR-wf` mit dem Befehl `conda activate AGR-wf`
 
 ### Ablage der Rohdaten
 
