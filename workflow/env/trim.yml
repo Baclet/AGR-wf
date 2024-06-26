@@ -1,0 +1,10 @@
+# workflow/env/trim.yml
+
+name: trim
+channels:
+    - bioconda
+    - conda-forge
+dependencies:
+    - fastqc
+    - porechop
+    - trim-galore

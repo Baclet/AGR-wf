@@ -27,6 +27,7 @@ print(f"Nanopore samples: {samples_nano}")
 # hinzufügen aller rules
 include: "workflow/rules/fastqc.smk"
 include: "workflow/rules/basecaller.smk"
+include: "workflow/rules/trim.smk"
 
 #rule all in der alle Zieldateien Angegeben werden die erstellt werden sollen.
 rule all:
@@ -41,6 +42,14 @@ rule all:
 ###               sample=samples_nano),
 ###        expand("result/{sample}/quality_control/nanopore/{sample}_fastqc.zip",
 ###               sample=samples_nano),
-	#Test Erstellung der .fastq-Files in /intermediate / "basecalling"
-	expand("result/{sample}/intermediate/nanopore/{sample}.fastq",
-               sample=samples_nano)
+#	# Test Erstellung der .fastq-Files in /intermediate / "basecalling" (kann später raus)
+#	expand("result/{sample}/intermediate/nanopore/{sample}.fastq",
+#               sample=samples_nano),
+#	# Test Erstellung der trim-galore reads funktioniert! (kann später raus)
+        expand("result/{sample}/intermediate/trimmed/{sample}_val_{read}.fq.gz",
+               sample=samples_illumina, read=[1, 2]),
+	# Illumina FastQC Ausgaben nach trimming
+        expand("result/{sample}/quality_control/illumina/{sample}_{pair}_trimmed_fastqc.html",
+               sample=samples_illumina, pair=["1", "2"]),
+        expand("result/{sample}/quality_control/illumina/{sample}_{pair}_trimmed_fastqc.zip",
+               sample=samples_illumina, pair=["1", "2"])
