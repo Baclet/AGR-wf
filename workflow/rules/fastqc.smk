@@ -29,4 +29,4 @@ rule fastqc_long:
     conda:
         "../../workflow/env/fastqc.yml"
     shell:
-        "fastqc -o {params.outdir} {input}"
+        "fastqc -o {params.outdir} --memory 9000 {input}"

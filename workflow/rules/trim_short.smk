@@ -42,3 +42,4 @@ rule fastqc_trimmed_short:
         echo "FastQC completed. Checking output:"
         ls -l {params.outdir}
         """
+# evtl. echo und ls befehl noch löschen
