@@ -1,4 +1,4 @@
-# workflow/rules/trim.smk
+# workflow/rules/trim_short.smk
 
 # Import der benötigten Module
 from snakemake.io import expand, glob_wildcards
@@ -22,7 +22,7 @@ rule trim_short:
         mv {params.outdir}/{wildcards.sample}_1_val_1.fq.gz {output.r1_trimmed}
         mv {params.outdir}/{wildcards.sample}_2_val_2.fq.gz {output.r2_trimmed}
 	"""
-### in der fastqc_trimmed_short ist noch ein fehler dannach auch die echo und ls befehle löschen
+
 rule fastqc_trimmed_short:
     input:
         "result/{sample}/intermediate/trimmed/{sample}_val_{pair}.fq.gz"
@@ -35,9 +35,6 @@ rule fastqc_trimmed_short:
         "../../workflow/env/trim.yml"
     shell:
         """
-        echo "Debug: sample={wildcards.sample}, pair={wildcards.pair}"
-        echo "Debug: input file={input}"
-        echo "Debug: output dir={params.outdir}"
         mkdir -p {params.outdir}
         fastqc -o {params.outdir} {input}
         mv {params.outdir}/{wildcards.sample}_val_{wildcards.pair}_fastqc.zip {output.zip}
@@ -45,30 +42,3 @@ rule fastqc_trimmed_short:
         echo "FastQC completed. Checking output:"
         ls -l {params.outdir}
         """
-
-# Regel für Nanopore Reads
-#rule trim_long:
-#    input:
-#        "result/{sample}/intermediate/nanopore/{sample}.fastq"
-#    output:
-#        "result/{sample}/intermediate/nanopore/{sample}_trimmed.fastq"
-#    params:
-#        outdir = "result/{sample}/intermediate/nanopore"
-#    conda:
-#        "../../workflow/env/trim.yml"
-#    shell:
-#        "porechop -i {input} -o {output}"
-
-
-#rule fastqc_trimmed_long:
-#    input:
-#        "result/{sample}/intermediate/nanopore/{sample}_trimmed.fastq"
-#    output:
-#        html = "result/{sample}/quality_control/nanopore/{sample}_trimmed_fastqc.html",
-#        zip = "result/{sample}/quality_control/nanopore/{sample}_trimmed_fastqc.zip"
-#    params:
-#        outdir = "result/{sample}/quality_control/nanopore"
-#    conda:
-#        "../../workflow/env/trim.yml"
-#    shell:
-#        "fastqc -o {params.outdir} {input}"

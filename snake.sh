@@ -6,7 +6,7 @@
 #SBATCH -N 1
 #SBATCH --mail-user=pascal.daniel.baclet@bioinfsys.uni-giessen.de
 #SBATCH --mail-type=END
-#SBATCH -J dorado_test_supdup_FLA_Q0
+#SBATCH -J AGR-wf
 #SBATCH -D /homes/pbaclet/no_backup/AGR-wf
 # ----------------Load Modules--------------------
 # ----------------Commands------------------------

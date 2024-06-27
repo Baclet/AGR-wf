@@ -27,7 +27,8 @@ print(f"Nanopore samples: {samples_nano}")
 # hinzufügen aller rules
 include: "workflow/rules/fastqc.smk"
 include: "workflow/rules/basecaller.smk"
-include: "workflow/rules/trim.smk"
+include: "workflow/rules/trim_short.smk"
+#include: "workflow/rules/trim_long.smk" #noch nicht
 
 #rule all in der alle Zieldateien Angegeben werden die erstellt werden sollen.
 rule all:
