@@ -39,7 +39,4 @@ rule fastqc_trimmed_short:
         fastqc -o {params.outdir} {input}
         mv {params.outdir}/{wildcards.sample}_val_{wildcards.pair}_fastqc.zip {output.zip}
         mv {params.outdir}/{wildcards.sample}_val_{wildcards.pair}_fastqc.html {output.html}
-        echo "FastQC completed. Checking output:"
-        ls -l {params.outdir}
         """
-# evtl. echo und ls befehl noch löschen
