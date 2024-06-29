@@ -28,7 +28,9 @@ print(f"Nanopore samples: {samples_nano}")
 include: "workflow/rules/fastqc.smk"
 include: "workflow/rules/basecaller.smk"
 include: "workflow/rules/trim_short.smk"
-include: "workflow/rules/trim_long.smk" #noch nicht
+include: "workflow/rules/trim_long.smk"
+include: "workflow/rules/assembly_nano.smk"
+
 
 #rule all in der alle Zieldateien Angegeben werden die erstellt werden sollen.
 rule all:
@@ -53,7 +55,12 @@ rule all:
         expand("result/{sample}/quality_control/illumina/{sample}_{pair}_trimmed_fastqc.html",
                sample=samples_illumina, pair=["1", "2"]),
         expand("result/{sample}/quality_control/illumina/{sample}_{pair}_trimmed_fastqc.zip",
-               sample=samples_illumina, pair=["1", "2"])
+               sample=samples_illumina, pair=["1", "2"]),
         # Nanopore FastQC Ausgaben nach trimming funktioniert, aber nicht lokal daher ###
-###        expand("result/{sample}/quality_control/nanopore/{sample}_trimmed_fastqc>###               sample=samples_nano),
-###        expand("result/{sample}/quality_control/nanopore/{sample}_trimmed_fastqc>###               sample=samples_nano),
+        expand("result/{sample}/quality_control/nanopore/{sample}_trimmed_fastqc.html",
+               sample=samples_nano),
+        expand("result/{sample}/quality_control/nanopore/{sample}_trimmed_fastqc.zim",
+               sample=samples_nano),
+	# Ausführen der Rule Assembly_nano
+        expand("result/{sample}/intermediate/assembly_flye/{sample}_assembly.fasta",
+		sample=samples_nano)
