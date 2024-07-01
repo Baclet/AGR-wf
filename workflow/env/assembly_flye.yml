@@ -1,4 +1,4 @@
-# workflow/env/flye.yml
+# workflow/env/assembly_flye.yml
 
 name: flye
 channels:
