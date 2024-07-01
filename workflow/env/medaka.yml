@@ -1,0 +1,8 @@
+# workflow/env/medaka.yml
+
+name: medaka
+channels:
+    - bioconda
+    - conda-forge
+dependencies:
+    - medaka
