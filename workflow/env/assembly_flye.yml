@@ -1,6 +1,6 @@
 # workflow/env/flye.yml
 
-name: trim
+name: flye
 channels:
     - bioconda
     - conda-forge

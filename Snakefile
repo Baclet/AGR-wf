@@ -59,7 +59,7 @@ rule all:
         # Nanopore FastQC Ausgaben nach trimming funktioniert, aber nicht lokal daher ###
         expand("result/{sample}/quality_control/nanopore/{sample}_trimmed_fastqc.html",
                sample=samples_nano),
-        expand("result/{sample}/quality_control/nanopore/{sample}_trimmed_fastqc.zim",
+        expand("result/{sample}/quality_control/nanopore/{sample}_trimmed_fastqc.zip",
                sample=samples_nano),
 	# Ausführen der Rule Assembly_nano
         expand("result/{sample}/intermediate/assembly_flye/{sample}_assembly.fasta",
