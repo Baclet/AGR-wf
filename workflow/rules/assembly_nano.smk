@@ -20,5 +20,5 @@ rule assembly_flye:
         """
         mkdir -p {params.outdir}
         flye --nano-raw "{input}" --out-dir "{params.outdir}" --threads {threads} 2>&1 | tee {log}
-        mv "{params.outdir}/assembly.fasta" "{output.nano_assembly}"
-        """
+        mv "{params.outdir}/assembly.fasta" "{output.nano_assembly}
+	"""
