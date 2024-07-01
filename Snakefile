@@ -30,7 +30,7 @@ include: "workflow/rules/basecaller.smk"
 include: "workflow/rules/trim_short.smk"
 include: "workflow/rules/trim_long.smk"
 include: "workflow/rules/assembly_nano.smk"
-
+#include: "workflow/rules/medaka.smk"
 
 #rule all in der alle Zieldateien Angegeben werden die erstellt werden sollen.
 rule all:
@@ -64,3 +64,6 @@ rule all:
 	# Ausführen der Rule Assembly_nano
         expand("result/{sample}/intermediate/assembly_flye/{sample}_assembly.fasta",
 		sample=samples_nano)
+	# Ausführen der Rule medaka
+#        expand("result/{sample}/intermediate/assembly_flye/medaka/{sample}_flye_medaka.fasta",
+#                sample=samples_nano)
