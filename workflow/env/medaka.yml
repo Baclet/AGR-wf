@@ -2,7 +2,13 @@
 
 name: medaka
 channels:
-    - bioconda
     - conda-forge
+    - bioconda
+    - defaults
 dependencies:
     - medaka
+    - python=3.10
+    - samtools
+    - minimap2
+    - tabix
+    - pytabix
