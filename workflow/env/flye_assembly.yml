@@ -1,6 +1,6 @@
-# workflow/env/assembly_flye.yml
+# workflow/env/flye_assembly.yml
 
-name: assembly_flye
+name: flye_assembly
 channels:
     - bioconda
     - conda-forge

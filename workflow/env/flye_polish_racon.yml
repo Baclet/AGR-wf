@@ -1,0 +1,9 @@
+# workflow/env/flye_polish_racon.yml
+
+name: flye_polish_racon
+channels:
+    - bioconda
+    - conda-forge
+dependencies:
+    - racon
+    - minimap2

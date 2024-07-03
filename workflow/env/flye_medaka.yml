@@ -1,6 +1,6 @@
-# workflow/env/medaka.yml
+# workflow/env/flye_medaka.yml
 
-name: medaka
+name: flye_medaka
 channels:
     - conda-forge
     - bioconda
