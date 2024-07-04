@@ -69,5 +69,5 @@ rule all:
         expand("result/{sample}/intermediate/assembly_flye/medaka/{sample}_flye_medaka.fasta",
                 sample=samples_nano),
 	# Ausführen der polish steps (Test)
-        expand("result/{sample}/intermediate/assembly_flye/polished/racon/{sample}_racon1.fasta",
+        expand("result/{sample}/intermediate/assembly_flye/polished/racon/{sample}_racon5.fasta",
 	    sample=samples_nano)
