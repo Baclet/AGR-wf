@@ -7,7 +7,7 @@ from snakemake.io import expand, glob_wildcards
 rule medaka_consensus:
     input:
         assembly = "result/{sample}/intermediate/assembly_flye/{sample}_assembly.fasta",
-	reads = "result/{sample}/intermediate/nanopore/{sample}.fastq"
+	reads = "result/{sample}/intermediate/nanopore/{sample}_trimmed.fastq"
     output:
         nano_assembly = "result/{sample}/intermediate/assembly_flye/medaka/{sample}_flye_medaka.fasta"
     params:

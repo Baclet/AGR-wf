@@ -4,6 +4,7 @@ name: flye_polish_racon
 channels:
     - bioconda
     - conda-forge
+    - defaults
 dependencies:
     - racon
     - minimap2

@@ -31,7 +31,7 @@ include: "workflow/rules/trim_short.smk"
 include: "workflow/rules/trim_long.smk"
 include: "workflow/rules/flye_assembly.smk"
 include: "workflow/rules/medaka.smk"
-#include: "workflow/rules/flye_polish_racon.smk"
+include: "workflow/rules/flye_polish_racon.smk"
 
 #rule all in der alle Zieldateien Angegeben werden die erstellt werden sollen.
 rule all:
@@ -39,8 +39,8 @@ rule all:
         # Illumina FastQC Ausgaben
         expand("result/{sample}/quality_control/illumina/{sample}_{pair}_fastqc.html",
                sample=samples_illumina, pair=["1", "2"]),
-        expand("result/{sample}/quality_control/illumina/{sample}_{pair}_fastqc.zip",
-               sample=samples_illumina, pair=["1", "2"]),
+##        expand("result/{sample}/quality_control/illumina/{sample}_{pair}_fastqc.zip",
+##               sample=samples_illumina, pair=["1", "2"]),
         # Nanopore FastQC Ausgaben funktioniert, aber nicht lokal daher ###
 ###        expand("result/{sample}/quality_control/nanopore/{sample}_fastqc.html",
 ###               sample=samples_nano),
@@ -55,16 +55,18 @@ rule all:
 	# Illumina FastQC Ausgaben nach trimming
         expand("result/{sample}/quality_control/illumina/{sample}_{pair}_trimmed_fastqc.html",
                sample=samples_illumina, pair=["1", "2"]),
-        expand("result/{sample}/quality_control/illumina/{sample}_{pair}_trimmed_fastqc.zip",
-               sample=samples_illumina, pair=["1", "2"]),
-        # Nanopore FastQC Ausgaben nach trimming funktioniert, aber nicht lokal daher ###
+##        expand("result/{sample}/quality_control/illumina/{sample}_{pair}_trimmed_fastqc.zip",
+##               sample=samples_illumina, pair=["1", "2"]),
+        # Nanopore FastQC Ausgaben nach trimming funktioniert, aber nicht lokal daher
         expand("result/{sample}/quality_control/nanopore/{sample}_trimmed_fastqc.html",
                sample=samples_nano),
-        expand("result/{sample}/quality_control/nanopore/{sample}_trimmed_fastqc.zip",
-               sample=samples_nano),
-	# Ausführen der Rule Flye_assembly
+##        expand("result/{sample}/quality_control/nanopore/{sample}_trimmed_fastqc.zip",
+##               sample=samples_nano),
+	# Ausführen der Rule Flye_assembly (kann später raus)
 ##        expand("result/{sample}/intermediate/assembly_flye/{sample}_assembly.fasta",
 ##		sample=samples_nano),
-#	# Ausführen der Rule medaka
+	# Ausführen der Rule medaka
         expand("result/{sample}/intermediate/assembly_flye/medaka/{sample}_flye_medaka.fasta",
-                sample=samples_nano)
+                sample=samples_nano),
+	# Ausführen der polish steps (Test)
+        expand("result/{sample}/intermediate/assembly_flye/polished/racon/{sample}_racon1.fasta", sample=samples_nano)
