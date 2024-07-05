@@ -68,6 +68,10 @@ rule all:
 	# Ausführen der Rule medaka
         expand("result/{sample}/intermediate/assembly_flye/medaka/{sample}_flye_medaka.fasta",
                 sample=samples_nano),
-	# Ausführen der polish steps (Test)
+	# Ausführen der polish steps
         expand("result/{sample}/intermediate/assembly_flye/polished/racon/{sample}_racon5.fasta",
-	    sample=samples_nano)
+	    sample=samples_nano),
+	# Ausführen Masurca-assembly (Test)
+        expand("result/{sample}/intermediate/assembly_masurca/raw_assembly/{sample}_assembly.fasta",
+            sample=samples_nano)
+
