@@ -1,9 +1,0 @@
-# workflow/env/masurca_assembly.yml
-
-name: masurca_assembly
-channels:
-    - bioconda
-    - conda-forge
-    - defaults
-dependencies:
-    - masurca

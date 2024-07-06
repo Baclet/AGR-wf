@@ -1,6 +1,6 @@
 # workflow/rules/masurca_assembly.smk
 
-# Import der benötigten Module
+# Import recuired moduls
 from snakemake.io import expand, glob_wildcards
 
 # rule to assembl the nanopore & illumina Reads
@@ -14,7 +14,7 @@ rule masurca_assembly:
     params:
         outdir = "result/{sample}/intermediate/assembly_masurca/raw_assembly"
     conda:
-        "../../workflow/env/masurca_assembly.yml"
+        "../../workflow/env/masurca.yml"
     threads: 8
     shell:
         """

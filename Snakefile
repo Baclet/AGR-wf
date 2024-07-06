@@ -32,6 +32,8 @@ include: "workflow/rules/trim_long.smk"
 include: "workflow/rules/flye_assembly.smk"
 include: "workflow/rules/medaka.smk"
 include: "workflow/rules/flye_polish_racon.smk"
+#include: "workflow/rules/flye_polish_polca.smk"
+include: "workflow/rules/masurca_assembly.smk"
 
 #rule all in der alle Zieldateien Angegeben werden die erstellt werden sollen.
 rule all:
@@ -71,6 +73,11 @@ rule all:
 	# Ausführen der polish steps
         expand("result/{sample}/intermediate/assembly_flye/polished/racon/{sample}_racon5.fasta",
 	    sample=samples_nano),
+
+        # Ausführen polca-polish (Test)
+#        expand("result/{sample}/intermediate/assembly_flye/polished/polcaI/{sample}_racon5_polcaI.fasta",
+#            sample=samples_nano),
+
 	# Ausführen Masurca-assembly (Test)
         expand("result/{sample}/intermediate/assembly_masurca/raw_assembly/{sample}_assembly.fasta",
             sample=samples_nano)
