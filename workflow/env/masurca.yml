@@ -1,0 +1,10 @@
+# workflow/env/masurca.yml
+
+name: masurca
+channels:
+    - bioconda
+    - conda-forge
+    - defaults
+dependencies:
+    - masurca
+    - bwa
