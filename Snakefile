@@ -32,8 +32,8 @@ include: "workflow/rules/trim_long.smk"
 include: "workflow/rules/flye_assembly.smk"
 include: "workflow/rules/medaka.smk"
 include: "workflow/rules/flye_polish_racon.smk"
-#include: "workflow/rules/flye_polish_polca.smk"
-include: "workflow/rules/masurca_assembly.smk"
+include: "workflow/rules/flye_polish_polca.smk"
+#include: "workflow/rules/masurca_assembly.smk"
 
 #rule all in der alle Zieldateien Angegeben werden die erstellt werden sollen.
 rule all:
@@ -52,8 +52,8 @@ rule all:
 #	expand("result/{sample}/intermediate/nanopore/{sample}.fastq",
 #               sample=samples_nano),
 #	# Test Erstellung der trim-galore reads funktioniert! (kann später raus)
-        expand("result/{sample}/intermediate/trimmed/{sample}_val_{read}.fq.gz",
-               sample=samples_illumina, read=[1, 2]),
+#        expand("result/{sample}/intermediate/trimmed/{sample}_val_{read}.fq.gz",
+#               sample=samples_illumina, read=[1, 2]),
 	# Illumina FastQC Ausgaben nach trimming
         expand("result/{sample}/quality_control/illumina/{sample}_{pair}_trimmed_fastqc.html",
                sample=samples_illumina, pair=["1", "2"]),
@@ -74,11 +74,11 @@ rule all:
         expand("result/{sample}/intermediate/assembly_flye/polished/racon/{sample}_racon5.fasta",
 	    sample=samples_nano),
 
-        # Ausführen polca-polish (Test)
-#        expand("result/{sample}/intermediate/assembly_flye/polished/polcaI/{sample}_racon5_polcaI.fasta",
-#            sample=samples_nano),
+        # Ausführen polca-polish
+        expand("result/{sample}/intermediate/assembly_flye/polished/polca/{sample}_racon5_polca4.fasta",
+            sample=samples_nano)
 
 	# Ausführen Masurca-assembly (Test)
-        expand("result/{sample}/intermediate/assembly_masurca/raw_assembly/{sample}_assembly.fasta",
-            sample=samples_nano)
+#        expand("result/{sample}/intermediate/assembly_masurca/raw_assembly/{sample}_assembly.fasta",
+#            sample=samples_nano)
 
