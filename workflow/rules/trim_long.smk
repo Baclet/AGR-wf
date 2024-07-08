@@ -1,9 +1,9 @@
 # workflow/rules/trim_long.smk
 
-# Import der benötigten Module
+# import the sample names
 from snakemake.io import expand, glob_wildcards
 
-# Regel für Nanopore Reads
+# rules to trim the nanopore reads
 rule trim_long:
     input:
         "result/{sample}/intermediate/nanopore/{sample}.fastq"
@@ -28,4 +28,4 @@ rule fastqc_trimmed_long:
     conda:
         "../../workflow/env/trim.yml"
     shell:
-        "fastqc -o {params.outdir} --memory 9000 {input}"
+        "fastqc -o {params.outdir} --memory 6000 {input}"

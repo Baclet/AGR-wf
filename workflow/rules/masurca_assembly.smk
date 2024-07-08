@@ -1,6 +1,6 @@
 # workflow/rules/masurca_assembly.smk
 
-# Import recuired moduls
+# import required moduls
 from snakemake.io import expand, glob_wildcards
 
 # rule to assembl the nanopore & illumina Reads (neu Testphase)
@@ -22,7 +22,7 @@ rule masurca_assembly:
         mkdir -p {params.outdir}
         mkdir -p {params.work_dir}
 
-        # Erstellen der Konfigurationsdatei
+        # create the config file
         cat << EOF > {params.work_dir}/config.txt
 DATA
 PE= pe 300 50 $(realpath {input.r1}) $(realpath {input.r2})
@@ -41,12 +41,12 @@ DO_HOMOPOLYMER_TRIM = 0
 END
 EOF
 
-        # MaSuRCA ausführen
+        # execute MaSuRCA
         cd {params.work_dir}
         masurca config.txt
         ./assemble.sh
 
-        # Verschieben der Ausgabedatei
+        # move the output file
         find CA -name "primary.genome.scf.fasta" -exec mv {{}} {output.mas_assembly} \;
         """
 

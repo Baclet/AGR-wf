@@ -1,9 +1,9 @@
 # workflow/rules/flye_assembly.smk
 
-# Import der benötigten Module
+# import sample names
 from snakemake.io import expand, glob_wildcards
 
-# Regeln fürs assembly der Nanopore Reads
+# rulte to assembly the nanopore reads
 rule flye_assembly:
     input:
         "result/{sample}/intermediate/nanopore/{sample}_trimmed.fastq"
@@ -13,7 +13,7 @@ rule flye_assembly:
         outdir = "result/{sample}/intermediate/assembly_flye"
     conda:
         "../../workflow/env/flye_assembly.yml"
-    threads: 8
+    threads: 50
     log:
         "logs/assembly_flye/{sample}.log"
     shell:

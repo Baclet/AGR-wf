@@ -1,9 +1,9 @@
 # workflow/rules/flye_polish_racon.smk
 
-# Import the sample names
+# import sample names
 from snakemake.io import expand, glob_wildcards
 
-# Rule to polish the nanopore assembly 5x with racon
+# rule to polish the nanopore assembly 5x with racon
 rule map_for_raconI:
     input:
         reads = "result/{sample}/intermediate/nanopore/{sample}.fastq",
@@ -12,7 +12,7 @@ rule map_for_raconI:
         paf = "result/{sample}/intermediate/assembly_flye/polished/racon/{sample}_racon1.paf"
     conda:
         "../../workflow/env/flye_polish_racon.yml"
-    threads: 8
+    threads: 20
     shell:
         "minimap2 -t {threads} -x map-ont {input.draft} {input.reads} > {output.paf}"
 
@@ -27,7 +27,7 @@ rule polish_raconI:
         outdir = "result/{sample}/intermediate/assembly_flye/polished/racon"
     conda:
         "../../workflow/env/flye_polish_racon.yml"
-    threads: 8
+    threads: 20
     shell:
         """
         mkdir -p {params.outdir}
@@ -43,7 +43,7 @@ rule map_for_raconII:
         paf = "result/{sample}/intermediate/assembly_flye/polished/racon/{sample}_racon2.paf"
     conda:
         "../../workflow/env/flye_polish_racon.yml"
-    threads: 8
+    threads: 20
     shell:
         "minimap2 -t {threads} -x map-ont {input.draft} {input.reads} > {output.paf}"
 
@@ -58,7 +58,7 @@ rule polish_raconII:
         outdir = "result/{sample}/intermediate/assembly_flye/polished/racon"
     conda:
         "../../workflow/env/flye_polish_racon.yml"
-    threads: 8
+    threads: 20
     shell:
         """
         mkdir -p {params.outdir}
@@ -74,7 +74,7 @@ rule map_for_raconIII:
         paf = "result/{sample}/intermediate/assembly_flye/polished/racon/{sample}_racon3.paf"
     conda:
         "../../workflow/env/flye_polish_racon.yml"
-    threads: 8
+    threads: 20
     shell:
         "minimap2 -t {threads} -x map-ont {input.draft} {input.reads} > {output.paf}"
 
@@ -89,7 +89,7 @@ rule polish_raconIII:
         outdir = "result/{sample}/intermediate/assembly_flye/polished/racon"
     conda:
         "../../workflow/env/flye_polish_racon.yml"
-    threads: 8
+    threads: 20
     shell:
         """
         mkdir -p {params.outdir}
@@ -105,7 +105,7 @@ rule map_for_raconIV:
         paf = "result/{sample}/intermediate/assembly_flye/polished/racon/{sample}_racon4.paf"
     conda:
         "../../workflow/env/flye_polish_racon.yml"
-    threads: 8
+    threads: 20
     shell:
         "minimap2 -t {threads} -x map-ont {input.draft} {input.reads} > {output.paf}"
 
@@ -120,7 +120,7 @@ rule polish_raconIV:
         outdir = "result/{sample}/intermediate/assembly_flye/polished/racon"
     conda:
         "../../workflow/env/flye_polish_racon.yml"
-    threads: 8
+    threads: 20
     shell:
         """
         mkdir -p {params.outdir}
@@ -136,7 +136,7 @@ rule map_for_raconV:
         paf = "result/{sample}/intermediate/assembly_flye/polished/racon/{sample}_racon5.paf"
     conda:
         "../../workflow/env/flye_polish_racon.yml"
-    threads: 8
+    threads: 20
     shell:
         "minimap2 -t {threads} -x map-ont {input.draft} {input.reads} > {output.paf}"
 
@@ -151,7 +151,7 @@ rule polish_raconV:
         outdir = "result/{sample}/intermediate/assembly_flye/polished/racon"
     conda:
         "../../workflow/env/flye_polish_racon.yml"
-    threads: 8
+    threads: 20
     shell:
         """
         mkdir -p {params.outdir}

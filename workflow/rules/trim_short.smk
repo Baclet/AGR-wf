@@ -1,9 +1,9 @@
 # workflow/rules/trim_short.smk
 
-# Import der benötigten Module
+# import the sample names
 from snakemake.io import expand, glob_wildcards
 
-# Regeln für Illumina Reads
+# rules to trim the short reads
 rule trim_short:
     input:
         r1 = "data/illumina/{sample}_1.fastq.gz",
@@ -36,7 +36,7 @@ rule fastqc_trimmed_short:
     shell:
         """
         mkdir -p {params.outdir}
-        fastqc -o {params.outdir} {input}
+        fastqc -o {params.outdir} --memory 6000 {input}
         mv {params.outdir}/{wildcards.sample}_val_{wildcards.pair}_fastqc.zip {output.zip}
         mv {params.outdir}/{wildcards.sample}_val_{wildcards.pair}_fastqc.html {output.html}
         """

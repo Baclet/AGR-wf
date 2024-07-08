@@ -1,9 +1,9 @@
 # workflow/rules/fastqc.smk
 
-# Import der benötigten Module
+# import sample names
 from snakemake.io import expand, glob_wildcards
 
-# Regel für Illumina Reads
+# rule to do the fastqc for the illumina reads
 rule fastqc_short:
     input:
         "data/illumina/{sample}_{pair}.fastq.gz"
@@ -15,9 +15,9 @@ rule fastqc_short:
     conda:
         "../../workflow/env/fastqc.yml"
     shell:
-        "fastqc -o {params.outdir} {input}"
+        "fastqc -o {params.outdir} -t 4 --memory 6000 {input}"
 
-# Regel für Nanopore Reads
+# rule to do the fastqc for the nanopore reads
 rule fastqc_long:
     input:
         "result/{sample}/intermediate/nanopore/{sample}.fastq"
@@ -29,4 +29,4 @@ rule fastqc_long:
     conda:
         "../../workflow/env/fastqc.yml"
     shell:
-        "fastqc -o {params.outdir} --memory 9000 {input}"
+        "fastqc -o {params.outdir} -t 4 --memory 6000 {input}"

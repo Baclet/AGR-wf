@@ -1,9 +1,9 @@
 # workflow/rules/medaka.smk
 
-# Import der benötigten Module
+# mport the sample names
 from snakemake.io import expand, glob_wildcards
 
-# Regeln fürs Consensus des Flye-Assemblys mit Medaka
+# rule to create the consensus of the flye-assembly with Medaka
 rule medaka_consensus:
     input:
         assembly = "result/{sample}/intermediate/assembly_flye/{sample}_assembly.fasta",

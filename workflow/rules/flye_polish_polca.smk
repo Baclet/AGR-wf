@@ -1,9 +1,9 @@
 # workflow/rules/flye_polish_polca.smk
 
-# Import sample names
+# import sample names
 from snakemake.io import expand, glob_wildcards
 
-# Rule to polish the flye_racon5_assembly 4 x with polca
+# rule to polish the flye_racon5_assembly 4 x with polca
 rule flye_polish_polcaI:
     input:
         r1 = "data/illumina/{sample}_1.fastq.gz",
@@ -15,7 +15,7 @@ rule flye_polish_polcaI:
         outdir = "result/{sample}/intermediate/assembly_flye/polished/polca"
     conda:
         "../../workflow/env/masurca.yml"
-    threads: 8
+    threads: 50
     shell:
         """
         mkdir -p {params.outdir}
@@ -36,7 +36,7 @@ rule flye_polish_polcaII:
         outdir = "result/{sample}/intermediate/assembly_flye/polished/polca"
     conda:
         "../../workflow/env/masurca.yml"
-    threads: 8
+    threads: 50
     shell:
         """
         polca.sh -a {input.draft} -r "{input.r1} {input.r2}" -t {threads}
@@ -56,7 +56,7 @@ rule flye_polish_polcaIII:
         outdir = "result/{sample}/intermediate/assembly_flye/polished/polca"
     conda:
         "../../workflow/env/masurca.yml"
-    threads: 8
+    threads: 50
     shell:
         """
         polca.sh -a {input.draft} -r "{input.r1} {input.r2}" -t {threads}
@@ -76,7 +76,7 @@ rule flye_polish_polcaIV:
         outdir = "result/{sample}/intermediate/assembly_flye/polished/polca"
     conda:
         "../../workflow/env/masurca.yml"
-    threads: 8
+    threads: 50
     shell:
         """
         polca.sh -a {input.draft} -r "{input.r1} {input.r2}" -t {threads}

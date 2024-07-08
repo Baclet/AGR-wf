@@ -1,12 +1,10 @@
 # workflow/rules/basecaller.smk
 
-# Import der benötigten Module
+# import samlpe names
 from snakemake.io import expand, glob_wildcards
 import os
 
-print(f"Process POD5 files and create BAM files using Dorado if necessary")
-
-# Überprüfung der FASTQ-Existenz
+# check if FASTQ existes
 def fastq_not_exists(wildcards):
     fastq_path = f"data/nanopore/{wildcards.sample}/basecaller_output/{wildcards.sample}.fastq"
     return not os.path.exists(fastq_path)
