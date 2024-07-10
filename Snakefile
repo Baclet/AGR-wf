@@ -33,7 +33,8 @@ include: "workflow/rules/flye_assembly.smk"
 include: "workflow/rules/medaka.smk"
 include: "workflow/rules/flye_polish_racon.smk"
 include: "workflow/rules/flye_polish_polca.smk"
-include: "workflow/rules/flye_scaffold_samba.smk"
+include: "workflow/rules/flye_scaffold_samba_hybrid.smk"
+include: "workflow/rules/flye_scaffold_samba_nano.smk"
 include: "workflow/rules/masurca_assembly.smk"
 
 #rule all in der alle Zieldateien Angegeben werden die erstellt werden sollen.
@@ -61,6 +62,7 @@ rule all:
         # Ausführen polca-polish flye kann später weg
         expand("result/{sample}/intermediate/assembly_flye/polished/polca/{sample}_racon5_polca4.fasta",
             sample=samples_nano),
+	### Mit der unteren Regel lässt sich steuern ob nur eine nanopore Seq durchgeführt wird.
         # Ausführen flye-samba-scaffolding racon_polca + just_racon Erstelle alle Flye-assemblys (Polishing nanopore + illumina and just nanopore)
         expand("result/{sample}/intermediate/assembly_flye/polished/samba/flye_racon_polca/{sample}_racon5_polca4_samba.fasta",
             sample=samples_nano),
