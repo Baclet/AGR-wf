@@ -33,7 +33,8 @@ include: "workflow/rules/flye_assembly.smk"
 include: "workflow/rules/medaka.smk"
 include: "workflow/rules/flye_polish_racon.smk"
 include: "workflow/rules/flye_polish_polca.smk"
-#include: "workflow/rules/masurca_assembly.smk"
+include: "workflow/rules/flye_scaffold_polca.smk"
+include: "workflow/rules/masurca_assembly.smk"
 
 #rule all in der alle Zieldateien Angegeben werden die erstellt werden sollen.
 rule all:
@@ -41,13 +42,9 @@ rule all:
         # Illumina FastQC Ausgaben
         expand("result/{sample}/quality_control/illumina/{sample}_{pair}_fastqc.html",
                sample=samples_illumina, pair=["1", "2"]),
-##        expand("result/{sample}/quality_control/illumina/{sample}_{pair}_fastqc.zip",
-##               sample=samples_illumina, pair=["1", "2"]),
         # Nanopore FastQC Ausgaben funktioniert, aber nicht lokal daher ###
-###        expand("result/{sample}/quality_control/nanopore/{sample}_fastqc.html",
-###               sample=samples_nano),
-###        expand("result/{sample}/quality_control/nanopore/{sample}_fastqc.zip",
-###               sample=samples_nano),
+        expand("result/{sample}/quality_control/nanopore/{sample}_fastqc.html",
+               sample=samples_nano),
 #	# Test Erstellung der .fastq-Files in /intermediate / "basecalling" (kann später raus)
 #	expand("result/{sample}/intermediate/nanopore/{sample}.fastq",
 #               sample=samples_nano),
@@ -62,23 +59,22 @@ rule all:
         # Nanopore FastQC Ausgaben nach trimming funktioniert, aber nicht lokal daher
         expand("result/{sample}/quality_control/nanopore/{sample}_trimmed_fastqc.html",
                sample=samples_nano),
-##        expand("result/{sample}/quality_control/nanopore/{sample}_trimmed_fastqc.zip",
-##               sample=samples_nano),
-	# Ausführen der Rule Flye_assembly (kann später raus)
-##        expand("result/{sample}/intermediate/assembly_flye/{sample}_assembly.fasta",
-##		sample=samples_nano),
+
 	# Ausführen der Rule medaka
         expand("result/{sample}/intermediate/assembly_flye/medaka/{sample}_flye_medaka.fasta",
                 sample=samples_nano),
-	# Ausführen der polish steps
+	# Ausführen der polish steps mit racon kann später weg
         expand("result/{sample}/intermediate/assembly_flye/polished/racon/{sample}_racon5.fasta",
 	    sample=samples_nano),
-
-        # Ausführen polca-polish
+        # Ausführen polca-polish flye
         expand("result/{sample}/intermediate/assembly_flye/polished/polca/{sample}_racon5_polca4.fasta",
-            sample=samples_nano)
+            sample=samples_nano),
+        # Ausführen samba-scaffolding flye
+        expand("result/{sample}/intermediate/assembly_flye/polished/samba/{sample}_racon5_polca4_samba.fasta",
+            sample=samples_nano),
 
 	# Ausführen Masurca-assembly (Test)
-#        expand("result/{sample}/intermediate/assembly_masurca/raw_assembly/{sample}_assembly.fasta",
-#            sample=samples_nano)
+        expand("result/ARM/intermediate/assembly_masurca/raw_assembly/ARM_assembly.fasta",
+            sample=samples_nano)
+### Masurca-assembly hier aktuell nur ARM statt {sample} bedingt durch einen Fehler
 

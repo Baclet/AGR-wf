@@ -16,7 +16,7 @@ rule masurca_assembly:
         work_dir = "result/{sample}/intermediate/assembly_masurca/work_dir"
     conda:
         "../../workflow/env/masurca.yml"
-    threads: 15
+    threads: 50
     shell:
         """
         mkdir -p {params.outdir}
