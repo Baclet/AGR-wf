@@ -10,4 +10,4 @@
 #SBATCH -D /homes/pbaclet/no_backup/AGR-wf
 # ----------------Load Modules--------------------
 # ----------------Commands------------------------
-snakemake --use-conda --cores 35
+snakemake --use-conda --cores 35 --verbose
