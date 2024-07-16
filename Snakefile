@@ -68,13 +68,13 @@ rule all:
         expand("result/{sample}/intermediate/assembly_flye/polished/samba/flye_racon_polca/{sample}_racon5_polca4_samba.fasta",
             sample=samples_nano),
         expand("result/{sample}/intermediate/assembly_flye/polished/samba/flye_racon/{sample}_racon5_samba.fasta",
-            sample=samples_nano)
-
-	# Ausführen Masurca-assembly (Test)
-#        expand("result/ARM/intermediate/assembly_masurca/raw_assembly/ARM_assembly.fasta",
-#            sample=samples_nano)
+            sample=samples_nano),
+        # Ausführen Masurca-assembly (Test)
+        expand("result/ARM/intermediate/assembly_masurca/raw_assembly/ARM_assembly.fasta",
+            sample=samples_nano),
 ### Masurca-assembly hier aktuell nur ARM statt {sample} bedingt durch einen Fehler
 
-	# Ausführen masurca-polish-polca (Test)
-#        expand("result/ARM/intermediate/assembly_masurca/polished/polca/ARM_assembly_polca1.fasta",
-#            sample=samples_nano)
+        # Ausführen masurca-polish-polca (Test)
+        expand("result/ARM/intermediate/assembly_masurca/polished/polca/ARM_assembly_polca4.fasta",
+            sample=samples_nano)
+
