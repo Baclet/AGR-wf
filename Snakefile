@@ -37,6 +37,7 @@ include: "workflow/rules/flye_scaffold_samba_hybrid.smk"
 include: "workflow/rules/flye_scaffold_samba_nano.smk"
 include: "workflow/rules/masurca_assembly.smk"
 include: "workflow/rules/masurca_polish_polca.smk"
+include: "workflow/rules/masurca_scaffold_samba.smk"
 
 #rule all in der alle Zieldateien Angegeben werden die erstellt werden sollen.
 rule all:
@@ -69,12 +70,15 @@ rule all:
             sample=samples_nano),
         expand("result/{sample}/intermediate/assembly_flye/polished/samba/flye_racon/{sample}_racon5_samba.fasta",
             sample=samples_nano),
-        # Ausführen Masurca-assembly (Test)
+        # Ausführen Masurca-assembly kann später weg
         expand("result/ARM/intermediate/assembly_masurca/raw_assembly/ARM_assembly.fasta",
             sample=samples_nano),
 ### Masurca-assembly hier aktuell nur ARM statt {sample} bedingt durch einen Fehler
 
-        # Ausführen masurca-polish-polca (Test)
+        # Ausführen masurca-polish-polca kann später weg
         expand("result/ARM/intermediate/assembly_masurca/polished/polca/ARM_assembly_polca4.fasta",
-            sample=samples_nano)
+            sample=samples_nano),
 
+        # Ausführen masurca-polish-samba (Test)
+	expand("result/{sample}/intermediate/assembly_masurca/polished/samba/{sample}_polca4_samba.fasta",
+	    sample=samples_nano)
