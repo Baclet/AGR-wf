@@ -19,8 +19,9 @@ rule flye_polish_polcaI:
     shell:
         """
         mkdir -p {params.outdir}
-        polca.sh -a {input.draft} -r "{input.r1} {input.r2}" -t {threads}
-        mv *_racon5*.PolcaCorrected.fa {output}
+        cd {params.outdir}
+        polca.sh -a ../../../../../../{input.draft} -r "../../../../../../{input.r1} ../../../../../../{input.r2}" -t {threads}
+        mv *_racon5*.PolcaCorrected.fa {wildcards.sample}_racon5_polca1.fasta
         rm *.fasta.*
         rm *.err
         """
@@ -39,8 +40,9 @@ rule flye_polish_polcaII:
     threads: 50
     shell:
         """
-        polca.sh -a {input.draft} -r "{input.r1} {input.r2}" -t {threads}
-        mv *_racon5*.PolcaCorrected.fa {output}
+        cd {params.outdir}
+        polca.sh -a ../../../../../../{input.draft} -r "../../../../../../{input.r1} ../../../../../../{input.r2}" -t {threads}
+        mv *_racon5*.PolcaCorrected.fa {wildcards.sample}_racon5_polca2.fasta
         rm *.fasta.*
         rm *.err
         """
@@ -59,8 +61,9 @@ rule flye_polish_polcaIII:
     threads: 50
     shell:
         """
-        polca.sh -a {input.draft} -r "{input.r1} {input.r2}" -t {threads}
-        mv *_racon5*.PolcaCorrected.fa {output}
+        cd {params.outdir}
+        polca.sh -a ../../../../../../{input.draft} -r "../../../../../../{input.r1} ../../../../../../{input.r2}" -t {threads}
+        mv *_racon5*.PolcaCorrected.fa {wildcards.sample}_racon5_polca3.fasta
         rm *.fasta.*
         rm *.err
         """
@@ -79,8 +82,9 @@ rule flye_polish_polcaIV:
     threads: 50
     shell:
         """
-        polca.sh -a {input.draft} -r "{input.r1} {input.r2}" -t {threads}
-        mv *_racon5*.PolcaCorrected.fa {output}
+        cd {params.outdir}
+        polca.sh -a ../../../../../../{input.draft} -r "../../../../../../{input.r1} ../../../../../../{input.r2}" -t {threads}
+        mv *_racon5*.PolcaCorrected.fa {wildcards.sample}_racon5_polca4.fasta
         rm *.fasta.*
         rm *.err
         """

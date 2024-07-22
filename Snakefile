@@ -48,37 +48,21 @@ rule all:
         # Nanopore FastQC Ausgaben
         expand("result/{sample}/quality_control/nanopore/{sample}_fastqc.html",
                sample=samples_nano),
-	# Illumina FastQC Ausgaben nach trimming
+        # Illumina FastQC Ausgaben nach trimming
         expand("result/{sample}/quality_control/illumina/{sample}_{pair}_trimmed_fastqc.html",
                sample=samples_illumina, pair=["1", "2"]),
         # Nanopore FastQC Ausgaben nach trimming
         expand("result/{sample}/quality_control/nanopore/{sample}_trimmed_fastqc.html",
                sample=samples_nano),
 
-	# Ausführen der Rule medaka kann später weg
-        expand("result/{sample}/intermediate/assembly_flye/medaka/{sample}_flye_medaka.fasta",
-                sample=samples_nano),
-	# Ausführen der polish steps mit racon kann später weg
-        expand("result/{sample}/intermediate/assembly_flye/polished/racon/{sample}_racon5.fasta",
-	    sample=samples_nano),
-        # Ausführen polca-polish flye kann später weg
-        expand("result/{sample}/intermediate/assembly_flye/polished/polca/{sample}_racon5_polca4.fasta",
-            sample=samples_nano),
-	### Mit der unteren Regel lässt sich steuern ob nur eine nanopore Seq durchgeführt wird. Add if rule
-        # Ausführen flye-samba-scaffolding racon_polca + just_racon Erstelle alle Flye-assemblys (Polishing nanopore + illumina and just nanopore)
+
+        ### Mit der unteren Regel lässt sich steuern ob nur eine nanopore Seq durchgeführt wird. Add if rule
+        # Ausführen flye-samba-scaffolding racon_polca (hybrid nanopore und illumina)
         expand("result/{sample}/intermediate/assembly_flye/polished/samba/flye_racon_polca/{sample}_racon5_polca4_samba.fasta",
             sample=samples_nano),
+        # Ausführen flye-assembler mit polish nur racon (nur nanopore)
         expand("result/{sample}/intermediate/assembly_flye/polished/samba/flye_racon/{sample}_racon5_samba.fasta",
             sample=samples_nano),
-        # Ausführen Masurca-assembly kann später weg
-        expand("result/ARM/intermediate/assembly_masurca/raw_assembly/ARM_assembly.fasta",
-            sample=samples_nano),
-### Masurca-assembly hier aktuell nur ARM statt {sample} bedingt durch einen Fehler
-
-        # Ausführen masurca-polish-polca kann später weg
-        expand("result/ARM/intermediate/assembly_masurca/polished/polca/ARM_assembly_polca4.fasta",
-            sample=samples_nano),
-
-        # Ausführen masurca-polish-samba (Test)
-	expand("result/{sample}/intermediate/assembly_masurca/polished/samba/{sample}_polca4_samba.fasta",
-	    sample=samples_nano)
+        # Ausführen masurca-assembler mit polish und samba       
+        expand("result/{sample}/intermediate/assembly_masurca/polished/samba/{sample}_polca4_samba.fasta",
+            sample=samples_nano)
