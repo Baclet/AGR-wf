@@ -38,6 +38,7 @@ include: "workflow/rules/flye_scaffold_samba_nano.smk"
 include: "workflow/rules/masurca_assembly.smk"
 include: "workflow/rules/masurca_polish_polca.smk"
 include: "workflow/rules/masurca_scaffold_samba.smk"
+include: "workflow/rules/quast.smk"
 
 #rule all in der alle Zieldateien Angegeben werden die erstellt werden sollen.
 rule all:
@@ -65,4 +66,9 @@ rule all:
             sample=samples_nano),
         # Ausführen masurca-assembler mit polish und samba       
         expand("result/{sample}/intermediate/assembly_masurca/polished/samba/{sample}_polca4_samba.fasta",
+            sample=samples_nano)
+
+	### Test quast:
+
+	expand("result/{sample}/final_genome/quast_results/{sample}_report.html",
             sample=samples_nano)

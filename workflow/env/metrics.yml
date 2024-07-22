@@ -1,0 +1,10 @@
+# workflow/env/metrics.yml
+
+name: fastqc
+channels:
+    - bioconda
+    - conda-forge
+dependencies:
+#    - busco
+    - quast
+    
