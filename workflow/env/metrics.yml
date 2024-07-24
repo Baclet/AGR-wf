@@ -5,6 +5,6 @@ channels:
     - bioconda
     - conda-forge
 dependencies:
-#    - busco
+    - busco
     - quast
     
