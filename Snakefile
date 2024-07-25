@@ -15,8 +15,6 @@ def find_samples(path):
                 sample_path = os.path.relpath(root, path)
                 sample_name = sample_path.split(os.sep)[0]  # Nimm den ersten Teil des relativen Pfads
                 samples.add(sample_name)
-                print(f"Found sample: {sample_name} in file: {file}")  # Debugging
-    print(f"All found samples: {samples}")
     return list(samples)
 
 samples_illumina, = glob_wildcards("data/illumina/{sample}_1.fastq.gz")
@@ -40,6 +38,7 @@ include: "workflow/rules/masurca_polish_polca.smk"
 include: "workflow/rules/masurca_scaffold_samba.smk"
 include: "workflow/rules/quast.smk"
 include: "workflow/rules/busco.smk"
+include: "workflow/rules/busco_plot.smk"
 
 #rule all in der alle Zieldateien Angegeben werden die erstellt werden sollen.
 rule all:
@@ -60,8 +59,8 @@ rule all:
 
         ### Mit der unteren Regel lässt sich steuern ob nur eine nanopore Seq durchgeführt wird. Add if rule
         # Ausführen flye-samba-scaffolding racon_polca (hybrid nanopore und illumina)
-        expand("result/{sample}/intermediate/assembly_flye/polished/samba/flye_racon_polca/{sample}_racon5_polca4_samba.fasta",
-            sample=samples_nano),
+#        expand("result/{sample}/intermediate/assembly_flye/polished/samba/flye_racon_polca/{sample}_racon5_polca4_samba.fasta",
+#            sample=samples_nano),
         # Ausführen flye-assembler mit polish nur racon (nur nanopore)
         expand("result/{sample}/intermediate/assembly_flye/polished/samba/flye_racon/{sample}_racon5_samba.fasta",
             sample=samples_nano),
@@ -69,10 +68,14 @@ rule all:
         expand("result/{sample}/intermediate/assembly_masurca/polished/samba/{sample}_polca4_samba.fasta",
             sample=samples_nano),
 
-	### Quality Control:
-	# Ausführen von quast:
-	expand("result/{sample}/final_genome/quast_results/{sample}_report.html",
+
+        ### Quality Control:
+        # Ausführen von quast:
+        expand("result/{sample}/final_genome/quast_results/{sample}_report.html",
             sample=samples_nano),
-	# Ausführen Busco (Test)
-	expand("result/{sample}/final_genome/busco_results",
-	    sample=samples_nano)
+        # Ausführen busco
+       expand("result/{sample}/final_genome/busco_results/",
+           sample=samples_nano),
+        # Ausführen von busco_plot:
+        expand("result/{sample}/final_genome/busco_summaries/busco_figure.png",
+            sample=samples_nano)

@@ -1,0 +1,22 @@
+# workflow/env/busco.yml
+
+name: busco
+channels:
+    - conda-forge
+    - bioconda
+dependencies:
+    - busco=5.7.1
+    - python
+    - bbmap
+    - blast
+    - augustus
+    - metaeuk
+    - prodigal
+    - hmmer
+    - sepp
+    - r-base
+    - r-ggplot2
+    - tbb
+    - pip
+    - pip:
+        - biopython==1.80

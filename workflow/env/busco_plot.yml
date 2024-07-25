@@ -1,0 +1,14 @@
+# workflow/env/busco_plot.yml
+
+name: busco_plot
+channels:
+    - conda-forge
+    - bioconda
+dependencies:
+    - busco=5.4.4
+    - python>=3.6
+    - r-base=4.1.3
+    - r-ggplot2=3.4.0
+    - pandas
+    - matplotlib
+    - seaborn

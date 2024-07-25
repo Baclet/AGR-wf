@@ -1,28 +1,38 @@
 # workflow/rules/busco.smk
 
-# import sample names
+import glob
+import os
 from snakemake.io import expand, glob_wildcards
-# define busco_db path
+
+# Define busco_db path
 BUSCO_DB_BASE = os.path.expanduser("~/busco_downloads/lineages")
 
-# rule to create the metrics with busco (Test)
+# Rule to create the metrics with busco (Test)
 rule busco_all:
+    input:
+        genomes = lambda wildcards: glob.glob(f"result/{wildcards.sample}/final_genome/*.fasta")
     output:
         directory("result/{sample}/final_genome/busco_results/")
     params:
-        db_path = lambda wildcards: os.path.join(BUSCO_DB_BASE, "fungi_odb10"),
-        lineage = "fungi_odb10"
+        lineage = "fungi_odb10",
+        db_path = BUSCO_DB_BASE
     conda:
-        "../../workflow/env/metrics.yml"
-    threads: 20
+        "../../workflow/env/busco.yml"
+    threads: 50
     shell:
-### check if DB is in path else download
         """
-	if [ ! -d "{params.db_path}" ]; then
-        echo "BUSCO database not found. Downloading..."
-        busco --download {params.lineage}
-        mkdir -p {BUSCO_DB_BASE}
-        mv {params.lineage} {BUSCO_DB_BASE}/
-        
-	busco -i result/{sample}/final_genome/*.fasta -o {output} -m genome -l {params.db_path} --force --cpus {threads}
+        busco --version
+        mkdir -p {output}
+
+        for genome in {input.genomes}; do
+            base_name=$(basename $genome .fasta)
+            out_dir="{output}/$base_name"
+
+            busco -i $genome \
+                  -o $out_dir \
+                  -m genome \
+                  -l {params.lineage} \
+#                  --force \
+                  --cpu {threads}
+        done
         """

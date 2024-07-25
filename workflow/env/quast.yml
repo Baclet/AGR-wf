@@ -1,10 +1,9 @@
-# workflow/env/metrics.yml
+# workflow/env/quast.yml
 
 name: fastqc
 channels:
     - bioconda
     - conda-forge
 dependencies:
-    - busco
     - quast
     

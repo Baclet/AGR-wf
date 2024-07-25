@@ -4,13 +4,13 @@
 from snakemake.io import expand, glob_wildcards
 
 # rule to create the metrics with quast
-rule quast_all:
+rule quast:
     output:
         "result/{sample}/final_genome/quast_results/{sample}_report.html"
     params:
         "result/{sample}/final_genome"
     conda:
-        "../../workflow/env/metrics.yml"
+        "../../workflow/env/quast.yml"
     shell:
         """
         cd {params}
