@@ -1,0 +1,8 @@
+# workflow/env/augustus.yml
+
+name: augustus
+channels:
+    - conda-forge
+    - bioconda
+dependencies:
+    - augustus

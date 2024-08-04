@@ -9,19 +9,24 @@ rule flye_scaffold_samba_hybrid:
         long_reads = "result/{sample}/intermediate/nanopore/{sample}.fastq",
         draft = "result/{sample}/intermediate/assembly_flye/polished/polca/{sample}_racon5_polca4.fasta"
     output:
-        "result/{sample}/intermediate/assembly_flye/polished/samba/flye_racon_polca/{sample}_racon5_polca4_samba.fasta"
+        "result/{sample}/intermediate/assembly_flye/polished/samba/flye_racon_polca/{sample}_racon5_polca4_samba.fasta",
+        "result/{sample}/intermediate/flags/flye_hybrid_done.txt"
     params:
         outdir = "result/{sample}/intermediate/assembly_flye/polished/samba/flye_racon_polca",
-	results = "result/{sample}/final_genome"
+        results = "result/{sample}/final_genome"
     conda:
         "../../workflow/env/masurca.yml"
     threads: 50
     shell:
         """
         mkdir -p {params.outdir}
-	mkdir -p {params.results}
-	cd {params.outdir}
+        mkdir -p {params.results}
+        cd {params.outdir}
         samba.sh -r ../../../../../../../{input.draft} -q ../../../../../../../{input.long_reads} -t {threads}
-        mv *_racon5_polca4.fasta.scaffolds.fa {wildcards.sample}_racon5_polca4_samba.fasta
+        cp *_racon5_polca4.fasta.scaffolds.fa {wildcards.sample}_racon5_polca4_samba.fasta
         cp {wildcards.sample}_racon5_polca4_samba.fasta ../../../../../../../{params.results}/{wildcards.sample}_polished.fasta
+#Flags:
+        mkdir -p ../../../../../../../result/{wildcards.sample}/intermediate/flags
+        touch ../../../../../../../result/{wildcards.sample}/intermediate/flags/flye_hybrid_done.txt
         """
+

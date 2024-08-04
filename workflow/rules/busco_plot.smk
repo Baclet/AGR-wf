@@ -1,23 +1,26 @@
 # workflow/rules/busco_plot.smk
+
+# import sample names
 import glob
 
 # Plot the busco results:
-rule busco_plot:
+rule quality_busco_plot:
     input:
-        summaries = lambda wildcards: glob.glob(f"result/{wildcards.sample}/final_genome/busco_results/*/short_summary*.txt")
+        flag = "result/{sample}/intermediate/flags/busco_done.txt"
     output:
-        plot = "result/{sample}/final_genome/busco_summaries/busco_figure.png"
-    params:
-        summary_dir = "result/{sample}/final_genome/busco_summaries"
+        flag = "result/{sample}/intermediate/flags/busco_plot_done.txt"
     conda:
-        "../../workflow/env/busco_plot.yml"
+        "../../workflow/env/busco.yml"
     shell:
         """
-        # create a folder and copy the summary
-        mkdir -p {params.summary_dir}
-        cp {input.summaries} {params.summary_dir}/
-
-        # execute the plotting script
-        cd {params.summary_dir}
-        generate_plot.py -wd .
+        mkdir -p result/{wildcards.sample}/final_genome/busco_summaries/
+        # Copy the busco files in the folder
+        for file in $(find result/{wildcards.sample}/final_genome/busco_results/ -name "short_summary*.txt"); do
+            cp $file result/{wildcards.sample}/final_genome/busco_summaries/
+        done
+        # Create the plot
+        generate_plot.py -wd result/{wildcards.sample}/final_genome/busco_summaries/
+        # Create the flag
+        touch {output.flag}
         """
+

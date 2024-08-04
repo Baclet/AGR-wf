@@ -10,7 +10,7 @@ def fastq_not_exists(wildcards):
     return not os.path.exists(fastq_path)
 
 
-# Regel zum Basecalling wenn noch keine .bam datei vorhanden ist. Diese muss auf hac gändert werden
+# Rule to do the basecalling if no .bam file is avalible
 rule process_pod5_dorado:
     input:
         pod5_dir = "data/nanopore/{sample}/pod5"
@@ -24,15 +24,14 @@ rule process_pod5_dorado:
         """
         if [ ! -f {params.output_dir}/{wildcards.sample}.fastq ]; then
             mkdir -p {params.output_dir}
-            dorado basecaller fast -v -x "cpu" --min-qscore 7 {input.pod5_dir} > {output.bam}
+            dorado basecaller hac -v -x "cpu" --min-qscore 7 {input.pod5_dir} > {output.bam}
         else
             echo "FASTQ file already exists for {wildcards.sample}. Skipping Dorado basecalling."
             touch {output.bam}
         fi
         """
 
-
-# Regel Erstellung der .fastq
+# Rule to create .fastq files
 rule copy_or_create_fastq:
     input:
         bam = "data/nanopore/{sample}/basecaller_output/{sample}.bam"
@@ -53,4 +52,4 @@ rule copy_or_create_fastq:
         else
             samtools bam2fq {output.bam} > {output.fastq}
         fi
-	"""
+        """

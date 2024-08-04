@@ -9,7 +9,8 @@ rule flye_scaffold_samba_nanopore:
         long_reads = "result/{sample}/intermediate/nanopore/{sample}.fastq",
         draft = "result/{sample}/intermediate/assembly_flye/polished/racon/{sample}_racon5.fasta"
     output:
-        "result/{sample}/intermediate/assembly_flye/polished/samba/flye_racon/{sample}_racon5_samba.fasta"
+        "result/{sample}/intermediate/assembly_flye/polished/samba/flye_racon/{sample}_racon5_samba.fasta",
+        "result/{sample}/intermediate/flags/flye_nano_done.txt"
     params:
         outdir = "result/{sample}/intermediate/assembly_flye/polished/samba/flye_racon",
         results = "result/{sample}/final_genome"
@@ -20,8 +21,12 @@ rule flye_scaffold_samba_nanopore:
         """
         mkdir -p {params.outdir}
         mkdir -p {params.results}
-	cd {params.outdir}
+        cd {params.outdir}
         samba.sh -r ../../../../../../../{input.draft} -q ../../../../../../../{input.long_reads} -t {threads}
-        mv *_racon5.fasta.scaffolds.fa {wildcards.sample}_racon5_samba.fasta
+        cp *_racon5.fasta.scaffolds.fa {wildcards.sample}_racon5_samba.fasta
         cp {wildcards.sample}_racon5_samba.fasta ../../../../../../../{params.results}/{wildcards.sample}_no_illumina_polished.fasta
-	"""
+#Flag:
+        mkdir -p ../../../../../../../result/{wildcards.sample}/intermediate/flags
+        touch ../../../../../../../result/{wildcards.sample}/intermediate/flags/flye_nano_done.txt
+        """
+

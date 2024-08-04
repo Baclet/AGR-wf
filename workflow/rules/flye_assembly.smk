@@ -15,7 +15,7 @@ rule flye_assembly:
         "../../workflow/env/flye_assembly.yml"
     threads: 50
     log:
-        "logs/assembly_flye/{sample}.log"
+        "result/{sample}/intermediate/nanopore/logs/assembly_flye/{sample}.log"
     shell:
         """
         mkdir -p {params.outdir}

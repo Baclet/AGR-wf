@@ -1,0 +1,5 @@
+# workflow/config.yaml
+
+# Workflow-Modi
+nano: true
+hybrid: false

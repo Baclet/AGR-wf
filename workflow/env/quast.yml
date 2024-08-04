@@ -1,9 +1,8 @@
 # workflow/env/quast.yml
 
-name: fastqc
+name: quast
 channels:
     - bioconda
     - conda-forge
 dependencies:
     - quast
-    
