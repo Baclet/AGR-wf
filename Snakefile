@@ -1,22 +1,21 @@
 # Snakefile
 
-#referenziere config file:
+# import the config-file to do different assemblys (long-read or hybrid)
 configfile: "workflow/config.yaml"
 
-#importiere entsprechende packages:
+# import relevant packages:
 import pandas as pd
 from snakemake.io import glob_wildcards
 import os
 import re
 
-
-# Auffinden der samples (Endung .bam .fastq oder im Ordner in dem sich die .pod5 Dateien befinden)
+# find the files in the specific folders (files with the ending .bam .fastq or .pod5 in the data/nanopore/{sample}/basecaller_output folder or/ and in the data/illumina folder
 def find_samples(path):
     samples = set()
     for root, dirs, files in os.walk(path):
         for file in files:
             if file.endswith('.fastq') or file.endswith('.bam') or file.endswith('.pod5'):
-                # Extrahiere den Sample-Namen aus dem Pfad
+                # extract "sample"-name
                 sample_path = os.path.relpath(root, path)
                 sample_name = sample_path.split(os.sep)[0]  # Nimm den ersten Teil des relativen Pfads
                 samples.add(sample_name)
@@ -27,7 +26,7 @@ samples_nano = find_samples("data/nanopore")
 print(f"Illumina samples: {samples_illumina}")
 print(f"Nanopore samples: {samples_nano}")
 
-# Definiert die zu verwendenden Regeln basierend auf den Konfigurationseinstellungen (Sagt welches Assembly ausgeführt werden soll)
+# which assembly should be performed: 1. config: nano = true, hybrid = false; 2. config: nano = false, hybrid = true; 3. default 
 if config["nano"] and not config["hybrid"]:
     include: "workflow/rules/nano_mode.smk"
 elif not config["nano"] and config["hybrid"]:
@@ -35,7 +34,7 @@ elif not config["nano"] and config["hybrid"]:
 else:
     include: "workflow/rules/all_mode.smk"
 
-# hinzufügen aller gemeinsamer rules
+# import all common rules
 include: "workflow/rules/fastqc.smk"
 include: "workflow/rules/basecaller.smk"
 include: "workflow/rules/trim_short.smk"
@@ -50,39 +49,36 @@ include: "workflow/rules/masurca_assembly.smk"
 include: "workflow/rules/masurca_polish_polca.smk"
 include: "workflow/rules/masurca_scaffold_samba.smk"
 include: "workflow/rules/quast.smk"
+# ab hier busco; busco_plot und augustus.smk auskommentiert. Diese funktionierten werden aber in den unterschiedlichen configurationen implementiert.
 include: "workflow/rules/busco.smk"
 include: "workflow/rules/busco_plot.smk"
 include: "workflow/rules/augustus.smk"
 include: "workflow/rules/clean_up.smk"
 
-#rule all in der alle Zieldateien Angegeben werden die erstellt werden sollen.
+# rule all to create specific files
 rule all:
     input:
-        # Nanopore FastQC Ausgaben
+        # nanopore FastQC
         expand("result/{sample}/quality_control/nanopore/{sample}_fastqc.html",
                sample=samples_nano),
-        # Nanopore FastQC Ausgaben nach trimming
+        # nanopore FastQC after trimming
         expand("result/{sample}/quality_control/nanopore/{sample}_trimmed_fastqc.html",
                sample=samples_nano),
-        # Test der config Einstellung: Welches Assembly ausgeführt werden soll
+        # check the config settings: Which assembly should be done
         expand("result/{sample}/intermediate/flags/mode_check.txt",
                sample=samples_nano),
-        # Ausführen von quast (test mit flag.txt output)
+        # create QUAST-file
         expand("result/{sample}/intermediate/flags/quast_done.txt",
                sample=samples_nano),
-        # Ausführen von busco_plot
-        expand("result/{sample}/intermediate/flags/busco_plot_done.txt",
+        # perform BUSCO analyses
+        expand("result/{sample}/final_genome/busco_results/",
                sample=samples_nano),
-        # Ausführen von augustus 
+        # create the  busco_plot summary
+        expand("result/{sample}/final_genome/busco_summaries/busco_figure.png",
+               sample=samples_nano),
+        # protein-prediction with AUGUSTUS 
         expand("result/{sample}/intermediate/flags/augustus_done.txt",
                sample=samples_nano),
-        # Ausführen von clean_up 
+        # do the clean_up (?) 
         expand("result/{sample}/success.txt",
                sample=samples_nano)
-        # Auskommentierte Regeln können hier als Kommentare bleiben
-#        expand("result/{sample}/intermediate/flags/quast_done.txt",
-#               sample=samples_nano),
-#        expand("result/{sample}/final_genome/quast_results/{sample}_report.html",
-#               sample=samples_nano),
-        # expand("result/{sample}/final_genome/busco_summaries/busco_figure.png", sample=samples_nano),
-        # expand("result/{sample}/final_genome/busco_results/", sample=samples_nano),

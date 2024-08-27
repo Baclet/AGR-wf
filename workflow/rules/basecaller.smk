@@ -10,7 +10,7 @@ def fastq_not_exists(wildcards):
     return not os.path.exists(fastq_path)
 
 
-# Rule to do the basecalling if no .bam file is avalible
+# rule to do the basecalling if no .bam file is avalible
 rule process_pod5_dorado:
     input:
         pod5_dir = "data/nanopore/{sample}/pod5"
@@ -31,7 +31,8 @@ rule process_pod5_dorado:
         fi
         """
 
-# Rule to create .fastq files
+
+# rule to create .fastq files
 rule copy_or_create_fastq:
     input:
         bam = "data/nanopore/{sample}/basecaller_output/{sample}.bam"
@@ -52,4 +53,4 @@ rule copy_or_create_fastq:
         else
             samtools bam2fq {output.bam} > {output.fastq}
         fi
-        """
+	"""

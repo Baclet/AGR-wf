@@ -1,5 +1,5 @@
 # workflow/rules/hybrid_mode.smk
-# different modi different inputs:
+# this rule ensures the correct performance of the assembly depending on the hybrid configuration in the config file
 import os
 
 rule hybrid_mode:

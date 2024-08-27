@@ -1,5 +1,5 @@
 # workflow/rules/nano_mode.smk
-# different modi different inputs:
+# this rule ensures the correct performance of the assembly depending on the nano configuration in the config file
 import os
 
 rule nano_mode:

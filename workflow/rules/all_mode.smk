@@ -1,8 +1,8 @@
 # workflow/rules/all_mode.smk
-# different modi different inputs:
+# this rule ensures the correct performance of the assembly depending on the hybrid nano or default configuration in the config file:
 import os
 
-rule all_mode:
+rule all_mode:    
     input:
         nan = "result/{sample}/intermediate/flags/flye_nano_done.txt",
         hybrid = "result/{sample}/intermediate/flags/flye_hybrid_done.txt",

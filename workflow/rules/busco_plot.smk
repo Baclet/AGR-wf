@@ -8,7 +8,9 @@ rule quality_busco_plot:
     input:
         flag = "result/{sample}/intermediate/flags/busco_done.txt"
     output:
-        flag = "result/{sample}/intermediate/flags/busco_plot_done.txt"
+        flag = "result/{sample}/intermediate/flags/busco_plot_done.txt",
+# Test oputput png
+	p = "result/{sample}/final_genome/busco_summaries/busco_figure.png"
     conda:
         "../../workflow/env/busco.yml"
     shell:
@@ -18,9 +20,8 @@ rule quality_busco_plot:
         for file in $(find result/{wildcards.sample}/final_genome/busco_results/ -name "short_summary*.txt"); do
             cp $file result/{wildcards.sample}/final_genome/busco_summaries/
         done
-        # Create the plot
-        generate_plot.py -wd result/{wildcards.sample}/final_genome/busco_summaries/
+	# Create the plot
+	generate_plot.py -wd result/{wildcards.sample}/final_genome/busco_summaries/
         # Create the flag
         touch {output.flag}
         """
-
