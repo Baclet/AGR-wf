@@ -5,7 +5,7 @@ Dieses Projekt wurde im Rahmen eines Laborpraktikums erstellt und enthält den W
 Mit dem Workflow werden die Sequenzen assembliert, annotiert und die entstandenen Genome einer Qualitätskontrolle unterzogen.
 Der Workflow benötigt dazu die Sequenzierdaten von Nanopore und Illumina. Folgende Anwendung läuft nur unter Linux oder IOS für eine Verwendung in Windows ist die Installation von WSL notwendig.
 
-## Verwendung
+## Verwendung von AGR-wf
 ### Installationsanweisung - Erzeugung des Conda Environments
 
 Die aktuellste Version von AGR-wf ist verfügbar unter [github](https://github.com/Baclet/AGR-wf).
@@ -26,12 +26,12 @@ Das Conda Environment sollte wie folgt erstellt werden:
 
 Die Rohdaten müssen in den Ordnern `data/nanopore` und `data/illumina` abgelegt werden. 
 
-Illumina Sequenzen müssen (!) in folgendem Format vorliegen: 
+Illumina Sequenzen müssen in folgendem Format vorliegen (!): 
 `data/illumina/{sample}_1.fastq.gz` und `data/illumina/{sample}_2.fastq.gz` 
 also z. B. `data/illumina/FLA_1.fastq.gz` 
 
 
-Nanopore Sequenzen müssen (!) in folgendem Format vorliegen:
+Nanopore Sequenzen müssen in folgendem Format vorliegen (!):
 `data/nanopore/{sample}/pod5/xyz.pod5` 
 also z. B. `data/nanopore/FLA/pod5/...`
 
@@ -51,7 +51,7 @@ Zur Ausführung muss das Working directory `AGR-wf/` sein.
 
 Der Workflow wird gestartet mit dem Befehl: `snakemake --use-conda --cores 40`
 Die `-cores x` Option gibt die Anzahl der Kerne an und ist abhängig vom vorhandenen Computer. 
-Einschränkung: eine kleine Anzahl an CPUs führt zu einem Abbruch. `AGR-wf` ist wurde auf 40 Kernen ausgelegt und getestet.
+*Einschränkung: Eine kleine Anzahl an CPUs führt zu einem Abbruch. `AGR-wf` ist wurde auf 40 Kernen ausgelegt und getestet.*
 
 Insbesondere wenn das Basecalling mit diesem Workflow ausgeführt werden soll empfiehlt sich die Verwendung eines SLURM-Clusters.
 Hierfür muss das `snake.sh` File angepasst werden. Entsprechend der Konfiguration für den eigenen SLURM-Account und Ausführungspfad.
