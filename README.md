@@ -33,7 +33,7 @@ also z. B. `data/illumina/FLA_1.fastq.gz`
 
 
 Nanopore Sequenzen müssen in folgendem Format vorliegen (!):  
-`data/nanopore/{sample}/pod5/xyz.pod5` 
+`data/nanopore/{sample}/pod5/xyz.pod5`   
 also z. B. `data/nanopore/FLA/pod5/...`  
 
 Ebenfalls möglich ist die Ablage von `.fastq` oder `.bam` files nach dem Basecalling:  
