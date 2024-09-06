@@ -17,7 +17,7 @@ rule flye_scaffold_samba_hybrid:
 	results = "result/{sample}/final_genome"
     conda:
         "../../workflow/env/masurca.yml"
-    threads: 50
+    threads: 40
     shell:
         """
         mkdir -p {params.outdir}

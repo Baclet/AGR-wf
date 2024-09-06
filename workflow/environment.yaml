@@ -4,6 +4,6 @@ channels:
     - bioconda
 
 dependencies:
-    - python <= 3.10.0a
+    - python <= 3.10
     - snakemake >= 7.32.0
     - pandas

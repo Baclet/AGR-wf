@@ -13,7 +13,7 @@ rule flye_assembly:
         outdir = "result/{sample}/intermediate/assembly_flye"
     conda:
         "../../workflow/env/flye_assembly.yml"
-    threads: 50
+    threads: 40
     log:
         "result/{sample}/intermediate/nanopore/logs/assembly_flye/{sample}.log"
     shell:

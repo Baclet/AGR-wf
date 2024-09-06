@@ -15,11 +15,11 @@ rule masurca_assembly:
         outdir = "result/{sample}/intermediate/assembly_masurca/raw_assembly"
     conda:
         "../../workflow/env/masurca.yml"
-    threads: 50
+    threads: 40
     shell:
         """
         mkdir -p {params.outdir}
         cd {params.outdir}
-        masurca -t {threads} -i ../../../../../{input.r1}, ../../../../../{input.r2} -r ../../../../../{input.long}
+        masurca -t {threads} -i ../../../../../{input.r1},../../../../../{input.r2} -r ../../../../../{input.long}
         mv CA.*/primary.genome.scf.fasta {wildcards.sample}_assembly.fasta
         """

@@ -17,7 +17,7 @@ def find_samples(path):
             if file.endswith('.fastq') or file.endswith('.bam') or file.endswith('.pod5'):
                 # extract "sample"-name
                 sample_path = os.path.relpath(root, path)
-                sample_name = sample_path.split(os.sep)[0]  # Nimm den ersten Teil des relativen Pfads
+                sample_name = sample_path.split(os.sep)[0]
                 samples.add(sample_name)
     return list(samples)
 
@@ -49,7 +49,6 @@ include: "workflow/rules/masurca_assembly.smk"
 include: "workflow/rules/masurca_polish_polca.smk"
 include: "workflow/rules/masurca_scaffold_samba.smk"
 include: "workflow/rules/quast.smk"
-# ab hier busco; busco_plot und augustus.smk auskommentiert. Diese funktionierten werden aber in den unterschiedlichen configurationen implementiert.
 include: "workflow/rules/busco.smk"
 include: "workflow/rules/busco_plot.smk"
 include: "workflow/rules/augustus.smk"
@@ -79,6 +78,6 @@ rule all:
         # protein-prediction with AUGUSTUS 
         expand("result/{sample}/intermediate/flags/augustus_done.txt",
                sample=samples_nano),
-        # do the clean_up (?) 
+        # do the clean_up (?)
         expand("result/{sample}/success.txt",
                sample=samples_nano)

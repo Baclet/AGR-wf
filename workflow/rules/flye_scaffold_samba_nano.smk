@@ -4,7 +4,6 @@
 from snakemake.io import expand, glob_wildcards
 
 # rule to scaffold the flye_racon5_assembly with samba
-# test expliziter output name für einmal workflow (erste zeile nach ouput sieh eunteren)
 rule flye_scaffold_samba_nanopore:
     input:
         long_reads = "result/{sample}/intermediate/nanopore/{sample}.fastq",
@@ -18,7 +17,7 @@ rule flye_scaffold_samba_nanopore:
         results = "result/{sample}/final_genome"
     conda:
         "../../workflow/env/masurca.yml"
-    threads: 50
+    threads: 40
     shell:
         """
         mkdir -p {params.outdir}

@@ -6,8 +6,8 @@ channels:
     - bioconda
     - defaults
 dependencies:
-    - medaka
     - python=3.10
+    - medaka=1.11.3
     - samtools
     - minimap2
     - tabix

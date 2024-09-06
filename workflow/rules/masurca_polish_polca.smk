@@ -15,7 +15,7 @@ rule masurca_polish_polcaI:
         outdir = "result/{sample}/intermediate/assembly_masurca/polished/polca"
     conda:
         "../../workflow/env/masurca.yml"
-    threads: 50
+    threads: 40
     shell:
         """
         mkdir -p {params.outdir}
@@ -37,7 +37,7 @@ rule masurca_polish_polcaII:
         outdir = "result/{sample}/intermediate/assembly_masurca/polished/polca"
     conda:
         "../../workflow/env/masurca.yml"
-    threads: 50
+    threads: 40
     shell:
         """
         cd {params.outdir}
@@ -58,7 +58,7 @@ rule masurca_polish_polcaIII:
         outdir = "result/{sample}/intermediate/assembly_masurca/polished/polca"
     conda:
         "../../workflow/env/masurca.yml"
-    threads: 50
+    threads: 40
     shell:
         """
         cd {params.outdir}
@@ -79,7 +79,7 @@ rule masurca_polish_polcaIV:
         outdir = "result/{sample}/intermediate/assembly_masurca/polished/polca"
     conda:
         "../../workflow/env/masurca.yml"
-    threads: 50
+    threads: 40
     shell:
         """
         cd {params.outdir}
