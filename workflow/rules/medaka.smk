@@ -16,8 +16,10 @@ rule medaka_consensus:
         "../../workflow/env/flye_medaka.yml"
     shell:
         """
+        export HDF5_USE_FILE_LOCKING=FALSE
+        export CUDA_VISIBLE_DEVICES=-1
         mkdir -p {params.outdir}
-        medaka_consensus -i "{input.reads}" -d "{input.assembly}" -o "{params.outdir}" -b 100
+        medaka_consensus -i "{input.reads}" -d "{input.assembly}" -o "{params.outdir}" -b 10
         cp "{params.outdir}/consensus.fasta" "{output.nano_assembly}"
         """
 
